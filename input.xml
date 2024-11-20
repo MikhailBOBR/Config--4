@@ -1,0 +1,7 @@
+<program>
+    <instruction opcode="LOAD_CONST" A="1" B="789"/>
+    <instruction opcode="LOAD_CONST" A="2" B="-456"/>
+    <instruction opcode="ABS"/>
+    <instruction opcode="WRITE_MEM" A="3" B="50"/>
+    <instruction opcode="READ_MEM" A="4" B="50"/>
+</program>
