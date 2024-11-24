@@ -92,57 +92,7 @@ def assemble(input_file, output_bin, log_file):
     tree = ET.ElementTree(log)
     tree.write(log_file)
 
-# Тесты для команд
-def test_load_const():
-    instruction = ET.Element('instruction', opcode='LOAD_CONST', A='8', B='539')
-    binary_code = assemble_line(instruction)
-    expected_binary = struct.pack('=B3xi', 0xB8 | (8 << 4), 539)
-    if binary_code == expected_binary:
-        print("Test LOAD_CONST passed: Values match")
-    else:
-        print(f"Test LOAD_CONST failed: Expected {expected_binary}, but got {binary_code}")
-
-def test_read_mem():
-    instruction = ET.Element('instruction', opcode='READ_MEM', A='4', B='163')
-    binary_code = assemble_line(instruction)
-    expected_binary = struct.pack('=B2xH', 0x34 | (4 << 4), 163)
-    if binary_code == expected_binary:
-        print("Test READ_MEM passed: Values match")
-    else:
-        print(f"Test READ_MEM failed: Expected {expected_binary}, but got {binary_code}")
-
-def test_write_mem():
-    stack.append(671)  # Для этого теста поместим значение в стек
-    instruction = ET.Element('instruction', opcode='WRITE_MEM', A='13', B='671')
-    binary_code = assemble_line(instruction)
-    expected_binary = struct.pack('=B2xH', 0xFD | (13 << 4), 671)
-    if binary_code == expected_binary:
-        print("Test WRITE_MEM passed: Values match")
-    else:
-        print(f"Test WRITE_MEM failed: Expected {expected_binary}, but got {binary_code}")
-
-def test_abs():
-    stack.append(-539)  # Для теста поместим значение в стек
-    instruction = ET.Element('instruction', opcode='ABS')
-    binary_code = assemble_line(instruction)
-    expected_binary = struct.pack('=B', 0x00)
-    if binary_code == expected_binary:
-        print("Test ABS passed: Values match")
-        print(f"ABS operation result: {stack[-1]} (Expected: 539)")
-    else:
-        print(f"Test ABS failed: Expected {expected_binary}, but got {binary_code}")
-        print(f"Current stack value after ABS: {stack[-1]}")
-
 if __name__ == '__main__':
-    # Запуск тестов
-    test_load_const()
-    test_read_mem()
-    test_write_mem()
-    test_abs()
-
-    print("\nAll tests have been executed.")
-
-    # Далее идет основной код для выполнения программы с реальными файлами
     input_file = sys.argv[1]  # XML файл с исходной программой
     output_bin = sys.argv[2]  # Путь к бинарному файлу
     log_file = sys.argv[3]    # Путь к файлу лога в формате XML

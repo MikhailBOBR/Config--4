@@ -21,6 +21,11 @@
    - `test_read_mem()`: Проверяет корректность преобразования инструкции `READ_MEM`.
    - `test_write_mem()`: Проверяет корректность преобразования инструкции `WRITE_MEM`.
    - `test_abs()`: Проверяет корректность работы инструкции `ABS`.
+    Чтобы запустить тестовую программу test_assembler.py: 
+```bash
+python test_assembler.py
+```
+
 
 ### Файл `interpreter.py`
 
